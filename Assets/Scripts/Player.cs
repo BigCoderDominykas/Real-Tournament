@@ -20,6 +20,10 @@ public class Player : MonoBehaviour
 
     public AnimationMod animations;
 
+    public AudioClip playerDamageSound;
+    public AudioClip weaponPickupSound;
+    public AudioClip weaponDropSound;
+
     private void Start()
     {
         health.onDamage.AddListener(UpdateUI);
@@ -41,6 +45,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             health.Damage(10);
+            AudioSystem.Play(playerDamageSound);
         }
     }
 
@@ -115,6 +120,7 @@ public class Player : MonoBehaviour
         weapon.transform.rotation = hand.rotation;
         weapon.transform.parent = hand;
 
+        AudioSystem.Play(weaponPickupSound);
         UpdateUI();
     }
 
@@ -133,6 +139,7 @@ public class Player : MonoBehaviour
         weapon.transform.parent = null;
         weapon = null;
 
+        AudioSystem.Play(weaponDropSound);
         UpdateUI();
     }
 }

@@ -16,6 +16,8 @@ public class Weapon : MonoBehaviour
     public float spreadAngle;
     public float reloadTime = 2f;
 
+    public AudioClip shootSound;
+
     public UnityEvent onRightClick;
     public UnityEvent onReload;
     public UnityEvent onShoot;
@@ -51,6 +53,7 @@ public class Weapon : MonoBehaviour
                 clipAmmo--;         
                 var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
                 bullet.transform.eulerAngles += Vector3.one * Random.Range(-spreadAngle, spreadAngle);
+                AudioSystem.Play(shootSound);
             }
         }
 
